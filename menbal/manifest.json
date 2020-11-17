@@ -1,0 +1,17 @@
+{
+    "name": "MENBAL APP",
+    "short_name": "MENBAL",
+    "description": "Web that show you information about soccer football",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#8d2de2",
+    "theme_color": "#8d2de2",
+    "icons": [
+        {
+            "src": "maskable_icon.png",
+            "sizes": "640x640",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
