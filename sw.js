@@ -43,7 +43,10 @@ if (workbox) {
         { url: "https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2", revision: 1 },
         { url: "/js/idb.js", revision: 1 },
         { url: "/js/db.js", revision: 1 }
-    ]);
+    ], {
+        // Ignore all URL parameters.
+        ignoreURLParametersMatching: [/.*/]
+    });
 
     registerRoute(
         ({ request }) => request.destination === "image",

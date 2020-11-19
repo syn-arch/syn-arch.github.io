@@ -46,40 +46,6 @@ function error(error) {
 // Blok kode untuk melakukan request data json
 function getStandings() {
 
-    if ('caches' in window) {
-        caches.match(`${base_url}competitions/${id_liga}/standings`).then(function (response) {
-            if (response) {
-                response.json().then(function (data) {
-                    const result = data.standings[0].table
-                    // Objek/array JavaScript dari response.json() masuk lewat data.
-                    // Menyusun komponen card artikel secara dinamis
-                    let standingsHTML = "";
-                    result.forEach(function (data) {
-                        standingsHTML += `<tr>
-                            <td>${data.position}</td>
-                            <td>
-                            <a href="/pages/team.html?id=${data.team.id}" class="white-text truncate detail_team">
-                            <img alt="${data.team.name}" class="responsive-img hide-on-small-only" width="40" height="auto" src="${data.team.crestUrl}"> 
-                            ${data.team.name}
-                            </a>
-                            </td>
-                            <td>${data.playedGames}</td>
-                            <td>${data.won}</td>
-                            <td>${data.draw}</td>
-                            <td>${data.lost}</td>
-                            <td>${data.goalsFor}</td>
-                            <td>${data.goalsAgainst}</td>
-                            <td>${data.goalDifference}</td>
-                            <td>${data.points}</td>
-                            </tr>`
-                    });
-                    // Sisipkan komponen card ke dalam elemen dengan id #content
-                    document.querySelector(".body-standings").innerHTML = standingsHTML;
-                })
-            }
-        })
-    }
-
     fetch(`${base_url}competitions/${id_liga}/standings`, {
         method: "GET",
         headers: {
@@ -125,52 +91,6 @@ function getTeamById() {
     const teamID = urlParams.get("id");
 
     return new Promise(function (resolve, reject) {
-        if ('caches' in window) {
-            caches.match(base_url + `teams/${teamID}`).then(function (response) {
-                if (response) {
-                    response.json().then(function (data) {
-                        // parsing data ke elemen HTML
-                        document.querySelector(".section-title").innerHTML = data.shortName;
-                        document.querySelector(".team-name").innerHTML = data.shortName;
-                        document.querySelector(".team-area").innerHTML = data.area.name;
-                        document.querySelector(".team-colour").innerHTML = data.clubColors;
-                        document.querySelector(".team-website").innerHTML = `<a target="_blank" href="${data.website}">${data.website}</a>`;
-                        document.querySelector(".team-img").src = data.crestUrl;
-
-                        // Menyusun komponen card artikel secara dinamis
-                        let comp = '';
-                        data.activeCompetitions.forEach(function (el) {
-                            tgl = new Date(el.lastUpdated);
-                            comp += `
-                                <tr>
-                                    <td>${el.name}</td>
-                                    <td>${el.area.name}</td>
-                                    <td>${getDay(tgl) + "-" + getMonth(tgl) + "-" + tgl.getFullYear()}</td>
-                                </tr>
-                                `;
-                        });
-                        document.getElementById("active-competitions").innerHTML = comp;
-
-                        let squad = '';
-                        data.squad.forEach(function (el) {
-                            tanggal = new Date(el.dateOfBirth);
-                            squad += `
-                            <tr>
-                                <td>${el.name} </td>
-                                <td>${el.position}</td>
-                                <td>${el.shirtNumber == null ? "" : el.shirtNumber}</td>
-                                <td>${el.role}</td>
-                                <td>${getDay(tanggal) + "-" + getMonth(tanggal) + "-" + tanggal.getFullYear()}</td>
-                                <td>${el.nationality}</td>
-                            </tr>
-                            `;
-                        });
-                        document.getElementById("team-squad").innerHTML = squad;
-                        resolve(data)
-                    })
-                }
-            })
-        }
 
         fetch(base_url + `teams/${teamID}`, {
             method: "GET",
