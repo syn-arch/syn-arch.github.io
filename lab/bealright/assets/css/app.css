@@ -153,7 +153,7 @@ button:hover {
 }
 
 .unhide {
-    opacity: 1;
+    opacity: 1 !important;
 }
 
 audio {
@@ -168,6 +168,8 @@ audio {
     border: none !important;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    z-index: 3;
+    transition: opacity 0.5s linear;
 }
 
 .rabbit-lyrics::-webkit-scrollbar {
@@ -285,4 +287,12 @@ audio {
     color: rgb(116, 116, 116);
     font-family: 'poppins';
     font-size: 10px;
+}
+
+/* visualizer */
+#canvas {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    min-height: 100vh;
 }
