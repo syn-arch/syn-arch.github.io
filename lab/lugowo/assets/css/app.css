@@ -163,13 +163,14 @@ audio {
 .rabbit-lyrics {
     background: transparent !important;
     color: white;
-    font-size: 2em;
+    font-size: 1.3em;
     margin-bottom: 20px;
     border: none !important;
     -ms-overflow-style: none;
     scrollbar-width: none;
     z-index: 3;
     transition: opacity 0.5s linear;
+    min-height: 5em;
 }
 
 .rabbit-lyrics::-webkit-scrollbar {
@@ -178,9 +179,11 @@ audio {
 
 .quotes {
     margin-top: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
     color: white;
     text-align: center;
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-style: italic;
     transition: opacity 0.5s linear;
 }
